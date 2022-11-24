@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const Controller = require("./controller");
 
-router.get("", Controller.Get);
-router.post("/addUser", Controller.Post);
-router.get("/getById/:id", Controller.GetById);
-router.patch("/update/:id", Controller.Update);
+router.get("/", Controller.GetUsers);
+router.post("/", Controller.AddUser);
+router.get("/:id", Controller.GetUserById);
+router.patch("/:id", Controller.UpdateUser);
+router.delete("/:id", Controller.DeleteUser);
 
 module.exports = router;
