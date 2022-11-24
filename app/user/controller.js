@@ -25,3 +25,38 @@ module.exports.Post = async (req, res) => {
     res.status(409).json({ message: err.message });
   }
 };
+
+module.exports.GetById = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const user = await Prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+    res.json(user);
+  } catch (err) {
+    res.status(409).json({ message: err.message });
+  }
+};
+
+module.exports.Update = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const updateUser = await Prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        name: req.body.name,
+        address: req.body.address,
+        phone_no: req.body.phone_no,
+      },
+    });
+    res.json(updateUser);
+  } catch (err) {
+    res.status(409).json({ message: err.message });
+  }
+};
