@@ -4,7 +4,14 @@ module.exports = {
   async GetUsers(req, res) {
     try {
       const users = await Prisma.user.findMany();
-      res.json(users);
+
+      if (users.length === 0) {
+        res.status(404).json({
+          message: [],
+        });
+      } else {
+        res.json(users);
+      }
     } catch (err) {
       res.status(500).json({
         message: err.message,
