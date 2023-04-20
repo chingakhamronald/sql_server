@@ -2,8 +2,16 @@ const Prisma = require("../../helper/client");
 
 module.exports = {
   async GetTransactionLists(req, res) {
+    const filterData = req?.query?.search;
+
+    console.log(filterData);
+
     try {
-      const users = await Prisma.transactionLists.findMany();
+      const users = await Prisma.transactionLists.findMany({
+        where: {
+          type: { equals: `${filterData}` },
+        },
+      });
 
       if (users.length === 0) {
         res.status(404).json({
@@ -12,7 +20,6 @@ module.exports = {
       } else {
         res.status(200).json({
           data: users,
-          message: "success",
         });
       }
     } catch (err) {

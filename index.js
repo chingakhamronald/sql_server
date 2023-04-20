@@ -4,14 +4,19 @@ const UserRouter = require("./app/user/router");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = Express();
+const port = process.env.PORT;
 
 dotenv.config();
-
-const port = process.env.PORT;
 
 app.use(cors());
 
 app.use(bodyParser.json());
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 
 app.use("/api/transactions", UserRouter);
 

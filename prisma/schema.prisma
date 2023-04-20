@@ -15,6 +15,7 @@ model TransactionLists {
   name         String
   payment_type String
   amount       Int
+  type         String
 }
 
 model Seller {
